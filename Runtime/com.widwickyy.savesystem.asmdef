@@ -1,0 +1,16 @@
+{
+    "name": "com.widwickyy.savesystem",
+    "rootNamespace": "SaveSystem",
+    "references": [
+        "UnityEngine.JsonSerializeModule"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
