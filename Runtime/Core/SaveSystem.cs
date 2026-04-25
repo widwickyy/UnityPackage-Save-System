@@ -1,41 +1,52 @@
-public class SaveSystem : ISaveSystem
+namespace Widwickyy.SaveSystem
 {
-    private readonly ISerializer serializer;
-    private readonly IStorage storage;
-    private readonly int version;
-
-    public SaveSystem(ISerializer serializer, IStorage storage, int version = 1)
+    public class SaveSystem : ISaveSystem
     {
-        this.serializer = serializer;
-        this.storage = storage;
-        this.version = version;
-    }
+        private readonly ISerializer serializer;
+        private readonly IStorage storage;
+        private readonly int version;
+        private readonly IStringCipher cipher;
 
-    public void Save<T>(string key, T data)
-    {
-        var wrapper = new SaveWrapper<T>(version, data);
-        var json = serializer.Serialize(wrapper);
-        storage.Write(key, json);
-    }
+        public SaveSystem(ISerializer serializer, IStorage storage, int version = 1, IStringCipher cipher = null)
+        {
+            this.serializer = serializer;
+            this.storage = storage;
+            this.version = version;
+            this.cipher = cipher;
+        }
 
-    public T Load<T>(string key)
-    {
-        if (!storage.Exists(key))
-            return default;
+        public void Save<T>(string key, T data)
+        {
+            var wrapper = new SaveWrapper<T>(version, data);
+            var json = serializer.Serialize(wrapper);
+            if (cipher != null)
+                json = cipher.Encrypt(json);
 
-        var json = storage.Read(key);
-        var wrapper = serializer.Deserialize<SaveWrapper<T>>(json);
+            storage.Write(key, json);
+        }
 
-        return wrapper.data;
-    }
+        public T Load<T>(string key)
+        {
+            if (!storage.Exists(key))
+                return default;
 
-    public bool Exists(string key)
-    {
-        return storage.Exists(key);
-    }
+            var json = storage.Read(key);
+            if (cipher != null)
+                json = cipher.Decrypt(json);
 
-    public void Delete(string key)
-    {
-        storage.Delete(key);
+            var wrapper = serializer.Deserialize<SaveWrapper<T>>(json);
+
+            return wrapper.data;
+        }
+
+        public bool Exists(string key)
+        {
+            return storage.Exists(key);
+        }
+
+        public void Delete(string key)
+        {
+            storage.Delete(key);
+        }
     }
 }

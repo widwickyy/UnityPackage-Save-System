@@ -1,26 +1,29 @@
 using Newtonsoft.Json;
 
-public class NewtonsoftSerializer : ISerializer
+namespace Widwickyy.SaveSystem
 {
-    private readonly JsonSerializerSettings settings;
-
-    public NewtonsoftSerializer()
+    public class NewtonsoftSerializer : ISerializer
     {
-        settings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings settings;
+
+        public NewtonsoftSerializer()
         {
-            Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.Auto,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-    }
+            settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.Auto,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+        }
 
-    public string Serialize<T>(T data)
-    {
-        return JsonConvert.SerializeObject(data, settings);
-    }
+        public string Serialize<T>(T data)
+        {
+            return JsonConvert.SerializeObject(data, settings);
+        }
 
-    public T Deserialize<T>(string json)
-    {
-        return JsonConvert.DeserializeObject<T>(json, settings);
+        public T Deserialize<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json, settings);
+        }
     }
 }

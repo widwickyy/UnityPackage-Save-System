@@ -2,12 +2,12 @@
   "name": "com.widwickyy.savesystem",
   "version": "1.0.0",
   "displayName": "Lightweight Save System",
-  "unity": "2021.3",
+  "unity": "2022.3",
   "description": "A simple, extensible save system for Unity with JSON serialization and file storage.",
   "author": {
-    "name": "Widwicky",
-    "email": "widwicky@example.com",
-    "url": "https://github.com/widwickyy"
+    "name": "Widwickyy",
+    "url": "https://github.com/widwickyy",
+    "email": "widwickyy@gmail.com"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.0"
@@ -21,6 +21,9 @@
     "persistence"
   ],
   "license": "MIT",
+  "documentationUrl": "https://github.com/widwickyy/UnityPackage-Save-System/blob/master/README.md",
+  "changelogUrl": "https://github.com/widwickyy/UnityPackage-Save-System/releases",
+  "licensesUrl": "https://github.com/widwickyy/UnityPackage-Save-System/blob/master/LICENSE",
   "repository": {
     "type": "git",
     "url": "https://github.com/widwickyy/UnityPackage-Save-System.git"

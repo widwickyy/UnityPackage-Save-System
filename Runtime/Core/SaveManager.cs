@@ -1,35 +1,43 @@
-public static class SaveManager
+namespace Widwickyy.SaveSystem
 {
-    private static ISaveSystem _instance;
-    
-    public static bool IsInitialized => _instance != null;
-
-    public static void Initialize(int version = 1)
+    public static class SaveManager
     {
-        _instance = new SaveSystem(
-            new NewtonsoftSerializer(),
-            new FileStorage(),
-            version
-        );
-    }
+        private static ISaveSystem _instance;
 
-    public static void Save<T>(string key, T data)
-    {
-        _instance?.Save(key, data);
-    }
+        public static bool IsInitialized => _instance != null;
 
-    public static T Load<T>(string key)
-    {
-        return _instance != null ? _instance.Load<T>(key) : default;
-    }
+        public static void Initialize(int version = 1, string encryptionKey = null)
+        {
+            IStringCipher cipher = null;
+            if (!string.IsNullOrWhiteSpace(encryptionKey))
+                cipher = new AesStringCipher(encryptionKey);
 
-    public static bool Exists(string key)
-    {
-        return _instance?.Exists(key) ?? false;
-    }
+            _instance = new SaveSystem(
+                new NewtonsoftSerializer(),
+                new FileStorage(),
+                version,
+                cipher
+            );
+        }
 
-    public static void Delete(string key)
-    {
-        _instance?.Delete(key);
+        public static void Save<T>(string key, T data)
+        {
+            _instance?.Save(key, data);
+        }
+
+        public static T Load<T>(string key)
+        {
+            return _instance != null ? _instance.Load<T>(key) : default;
+        }
+
+        public static bool Exists(string key)
+        {
+            return _instance?.Exists(key) ?? false;
+        }
+
+        public static void Delete(string key)
+        {
+            _instance?.Delete(key);
+        }
     }
 }

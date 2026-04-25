@@ -1,8 +1,12 @@
 {
-    "name": "com.widwickyy.savesystem",
-    "rootNamespace": "Widwickyy.SaveSystem",
-    "references": [],
-    "includePlatforms": [],
+    "name": "com.widwickyy.savesystem.editor",
+    "rootNamespace": "Widwickyy.SaveSystem.Editor",
+    "references": [
+        "com.widwickyy.savesystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

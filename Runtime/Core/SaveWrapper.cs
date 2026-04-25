@@ -1,12 +1,15 @@
-[System.Serializable]
-public class SaveWrapper<T>
+namespace Widwickyy.SaveSystem
 {
-    public int version;
-    public T data;
-
-    public SaveWrapper(int version, T data)
+    [System.Serializable]
+    public class SaveWrapper<T>
     {
-        this.version = version;
-        this.data = data;
+        public int version;
+        public T data;
+
+        public SaveWrapper(int version, T data)
+        {
+            this.version = version;
+            this.data = data;
+        }
     }
 }
