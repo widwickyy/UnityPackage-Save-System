@@ -1,6 +1,7 @@
 # Lightweight Save System
 
 A simple, extensible save system for Unity built on top of Newtonsoft JSON, under the `Widwickyy.SaveSystem` namespace.
+<img width="828" height="716" alt="output-onlinegiftools" src="https://github.com/user-attachments/assets/ab6def6f-30a2-4bc6-91f4-c13049290fad" />
 
 ## Features
 
